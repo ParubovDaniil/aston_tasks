@@ -4,5 +4,4 @@ public interface Vehicle {
     boolean hasWheels();   //колеса
     boolean hasVint();     //винт
     boolean hasWings();    //крылья
-    boolean carriesCargo(); //грузы
 }

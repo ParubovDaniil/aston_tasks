@@ -1,6 +1,12 @@
 package com.parubovdaniil_astontasks.HomeWork1.task1;
 
 public abstract class Mammal extends Animal implements HasSpine {
+    protected Spine spine = new Spine();
+
+    @Override
+    public boolean hasSpine() {
+        return spine.hasSpine();
+    }
 
     @Override
     public void feelable() {
@@ -8,19 +14,4 @@ public abstract class Mammal extends Animal implements HasSpine {
         System.out.println("Я могу слышать по своему");
         System.out.println("...");
     }
-
-    @Override
-    public boolean isAlive() {
-        return super.isAlive();
-    }
-
-    @Override
-    public abstract void moveable();
-
-    @Override
-    public boolean hasSpine() {
-        System.out.println("У меня есть позвоночник");
-        return true;
-    }
-
 }

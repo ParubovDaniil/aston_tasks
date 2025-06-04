@@ -1,29 +1,31 @@
 package com.parubovdaniil_astontasks.HomeWork1.task2;
 
-public class Boat extends AbstractTransport{
 
+public class Boat extends AbstractTransport {
+    private final Wheels wheels = new Wheels(false);
+    private final Vint vint = new Vint(true);
+    private final Wings wings = new Wings(false);
 
     @Override
     public boolean hasWheels() {
-        System.out.print("У Катера есть колёса ");
-        return false;
+        System.out.print("У Катера есть колёса: ");
+        return wheels.hasWheels();
     }
 
     @Override
     public boolean hasVint() {
-        System.out.print("У Катера есть винт ");
-        return true;
+        System.out.print("У Катера есть винт: ");
+        return vint.hasVint();
     }
 
     @Override
     public boolean hasWings() {
-        System.out.print("У Катера есть крылья ");
-        return false;
-        }
+        System.out.print("У Катера есть крылья: ");
+        return wings.hasWings();
+    }
 
-    @Override
     public boolean carriesCargo() {
-        System.out.print("Катер перевозит грузы ");
+        System.out.print("Катер перевозит грузы: ");
         return true;
-        }
+    }
 }

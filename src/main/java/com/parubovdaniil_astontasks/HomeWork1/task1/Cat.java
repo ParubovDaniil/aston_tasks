@@ -1,11 +1,10 @@
 package com.parubovdaniil_astontasks.HomeWork1.task1;
 
-public class Cat extends Mammal implements HasFur{
+public class Cat extends Mammal {
+    private final Fur fur = new Fur();
 
-    @Override
     public boolean hasFur() {
-        System.out.println("У меня кошачья шерсть ");
-        return true;
+        return fur.hasFur();
     }
 
     @Override
@@ -18,5 +17,4 @@ public class Cat extends Mammal implements HasFur{
     public void moveable() {
         System.out.println("Я двигаюсь преимущественно по земле");
     }
-    
 }

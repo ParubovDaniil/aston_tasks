@@ -1,11 +1,10 @@
 package com.parubovdaniil_astontasks.HomeWork1.task1;
 
-public class Bear extends Mammal implements HasFur {
+public class Bear extends Mammal {
+    private final Fur fur = new Fur();
 
-    @Override
     public boolean hasFur() {
-        System.out.println("У меня медвежья шерсть: ");
-        return true;
+        return fur.hasFur();
     }
 
     @Override
