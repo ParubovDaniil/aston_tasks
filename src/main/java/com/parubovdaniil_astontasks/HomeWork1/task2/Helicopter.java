@@ -1,9 +1,8 @@
 package com.parubovdaniil_astontasks.HomeWork1.task2;
 
-public class Helicopter extends AbstractTransport {
+public class Helicopter extends AbstractTransport implements CarriesCargo{
     private final Wheels wheels = new Wheels(true);
     private final Vint vint = new Vint(true);
-    private final Wings wings = new Wings(false);
 
     @Override
     public boolean hasWheels() {
@@ -16,13 +15,7 @@ public class Helicopter extends AbstractTransport {
         System.out.print("У Вертолёта есть винт: ");
         return vint.hasVint();
     }
-
     @Override
-    public boolean hasWings() {
-        System.out.print("У Вертолёта есть крылья: ");
-        return wings.hasWings();
-    }
-
     public boolean carriesCargo() {
         System.out.print("Вертолёт перевозит грузы: ");
         return true;

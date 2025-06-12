@@ -1,6 +1,6 @@
 package com.parubovdaniil_astontasks.HomeWork1.task2;
 
-public class Airplane extends AbstractTransport {
+public class Airplane extends AbstractTransport implements CarriesCargo {
     private final Wheels wheels = new Wheels(true);
     private final Vint vint = new Vint(true);
     private final Wings wings = new Wings(true);
@@ -23,6 +23,7 @@ public class Airplane extends AbstractTransport {
         return wings.hasWings();
     }
 
+    @Override
     public boolean carriesCargo() {
         System.out.print("Самолёт перевозит грузы: ");
         return true;
