@@ -34,6 +34,7 @@ public class MyArrayList<T> {
         elements[size++] = element;
     }
 
+    @SuppressWarnings("unchecked")
     public T get(int index) {
         if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("индекс: " + index + ", размер: " + size);
@@ -46,7 +47,7 @@ public class MyArrayList<T> {
             throw new IndexOutOfBoundsException("индекс: " + index + ", размер: " + size);
         }
         System.arraycopy(elements, index + 1, elements, index, size - index - 1);
-        size--;
+        elements[--size] = null;
     }
 
     public void addAll(Collection<? extends T> collection) {
