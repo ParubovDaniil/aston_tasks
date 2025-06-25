@@ -1,45 +1,76 @@
 package com.parubovdaniil_astontasks.HomeWork4.task1;
 
 public class LiveLock {
-    static class JavaRush {
-        private boolean isAvailable = true;
-    }
+    private static final String LESSON_TAKEN_BY_STUDENT1 = "Урок взят Студентом 1";
+    private static final String LESSON_TAKEN_BY_STUDENT2 = "Урок взят Студентом 2";
 
-    static class JavaStudent {
-        private String name;
-        private JavaRush javarush;
+    private static String lessonStatus = "Доступен для прохождения";
+    private final Object lesson = new Object();
 
-        public JavaStudent(String name, JavaRush javarush) {
-            this.name = name;
-            this.javarush = javarush;
-        }
-
-        public void eat() {
-            while (true) {
-                if (javarush.isAvailable) {
-                    javarush.isAvailable = false;
-                    System.out.println(name + " попытался пройти урок");
-                    try { Thread.sleep(50); } catch (InterruptedException e) {}
-                    System.out.println(name + " прошёл");
-                    javarush.isAvailable = true;
-                    break;
-                } else {
-                    System.out.println(name + " ждет месяц");
+    public void tryCompleteLesson() {
+        Thread student1 = new Thread(() -> {
+            while(true) {
+                synchronized(lesson) {
+                    if (!LESSON_TAKEN_BY_STUDENT1.equals(lessonStatus)) {
+                        lessonStatus = LESSON_TAKEN_BY_STUDENT1;
+                        System.out.println("Студент 1 начал проходить урок");
+                    }
+                }
+                try {
+                    System.out.println("Студент 1 пытается завершить урок...\n");
+                    Thread.sleep(2000);
+                } catch(InterruptedException e) {
+                    System.err.println("Ошибка у Студента 1: " + e.getMessage());
+                }
+                synchronized(lesson) {
+                    if (LESSON_TAKEN_BY_STUDENT1.equals(lessonStatus)) {
+                        System.out.println("Студент 1 завершил урок");
+                        break;
+                    }
                 }
             }
-        }
-    }
+        });
 
-    public static void main(String[] args) {
-        JavaRush javarush = new JavaRush();
+        Thread student2 = new Thread(() -> {
+            try {
+                System.out.println("Студент 2 медленно подключается к уроку\n");
+                Thread.sleep(1000);
+            } catch(InterruptedException e) {
+                System.err.println("Ошибка у Студента 2: " + e.getMessage());
+            }
+            while(true) {
+                synchronized(lesson) {
+                    if (!LESSON_TAKEN_BY_STUDENT2.equals(lessonStatus)) {
+                        lessonStatus = LESSON_TAKEN_BY_STUDENT2;
+                        System.out.println("Студент 2 начал проходить урок");
+                    }
+                }
+                try {
+                    System.out.println("Студент 2 пытается завершить урок...\n");
+                    Thread.sleep(2000);
+                } catch(InterruptedException e) {
+                    System.err.println("Ошибка у Студента 2: " + e.getMessage());
+                }
+                synchronized(lesson) {
+                    if (LESSON_TAKEN_BY_STUDENT2.equals(lessonStatus)) {
+                        System.out.println("Студент 2 завершил урок");
+                        break;
+                    }
+                }
+            }
+        });
 
-        JavaStudent p1 = new JavaStudent("СтудентДжавы 1", javarush);
-        JavaStudent p2 = new JavaStudent("СтудентДжавы 2", javarush);
-
-        Thread t1 = new Thread(p1::eat);
-        Thread t2 = new Thread(p2::eat);
-
-        t1.start();
-        t2.start();
+        student1.start();
+        student2.start();
     }
 }
+class ForBegin{
+    public static void main(String[] args) {
+        run();
+    }
+    public static void run(){
+        LiveLock liveLock = new LiveLock();
+        liveLock.tryCompleteLesson();
+    }
+}
+
