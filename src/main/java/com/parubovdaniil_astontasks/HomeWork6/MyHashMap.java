@@ -1,4 +1,4 @@
-package com.parubovdaniil_astontasks.HomeWork6.task1;
+package com.parubovdaniil_astontasks.HomeWork6;
 
 import java.util.Arrays;
 import java.util.Objects;
